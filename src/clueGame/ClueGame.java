@@ -21,6 +21,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
@@ -34,6 +35,7 @@ import clueGUI.GameControlGUI;
 public class ClueGame extends JFrame {
 	private String playerFile;
 	private String weaponFile;
+	private JOptionPane splash;
 	public ArrayList<Player> playerList;
 	public ArrayList<Card> seen, deck, peopleList, roomList, weaponList;
 	public Map<Player, ArrayList<Card>> playerCards;
@@ -58,6 +60,7 @@ public class ClueGame extends JFrame {
 		this.board = new Board();
 		board.setGame(this);
 		board.loadConfigFiles();
+		this.loadConfigFiles();
 		boardGUI = new BoardGUI(board, this);
 		controlPanel = new GameControlGUI();
 		setLayout(new GridLayout(1,0));
@@ -68,7 +71,8 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(BorderLayout.CENTER, boardGUI);
 		add(BorderLayout.SOUTH, controlPanel);
-		
+		this.setVisible(true);
+		splashScreen(human);
 	}
 	
 	public ClueGame(String playerFile, String weaponFile) throws Exception {
@@ -86,6 +90,7 @@ public class ClueGame extends JFrame {
 		this.board = new Board();
 		board.setGame(this);
 		board.loadConfigFiles();
+		this.loadConfigFiles();
 		boardGUI = new BoardGUI(board, this);
 		controlPanel = new GameControlGUI();
 		setLayout(new GridLayout(1,0));
@@ -96,6 +101,8 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(BorderLayout.CENTER, boardGUI);
 		add(BorderLayout.SOUTH, controlPanel);
+		this.setVisible(true);
+		splashScreen(human);
 	}
 	
 	public void initializeBoard() {
@@ -278,18 +285,20 @@ public class ClueGame extends JFrame {
 		return color;
 	}
 	
+	public void splashScreen(Player person) {
+		String humanName = person.getName();
+		JOptionPane.showMessageDialog(null, "You are " + humanName 
+				+ ", press Next Player to begin play!", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
 	public static void main(String[] args) throws Exception {
 		try {
 			ClueGame game = new ClueGame();
-			game.loadConfigFiles();
 			game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			game.setVisible(true);
 		} catch (BadConfigFormatException e) {
 			System.err.println(e.getMessage());
 		} catch (FileNotFoundException e) {
 			System.err.println("File not found (exception caught).");
-		} //catch (Exception e) {
-			//System.err.println("Other exception caught.");
-		//}
+		}
 	}
 }
