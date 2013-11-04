@@ -1,0 +1,11 @@
+S, Sick Bay
+O, Observatory
+D, Drawing Room
+K, Kitchen
+Z, Zoo
+G, Garden
+P, Swimming Pool
+L, Library
+R, Wardrobe
+W, Walkway
+X, Control Room

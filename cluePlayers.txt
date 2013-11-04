@@ -1,0 +1,6 @@
+The Doctor, blue, 7, h
+River Song, green, 225, c
+The Master, red, 618, c
+The Silence, black, 199, c
+Weeping Angel, gray, 18, c
+Dalek Caan, pink, 499, c
